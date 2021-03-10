@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  db_brisapix_dev:
+    image: postgres
+    restart: always
+    env_file:
+      - ./.envs/.env.dev
+    ports:
+      - "${POSTGRES_DEV_PORT}:5432"
+
+  db_brisapix_test:
+    image: postgres
+    restart: always
+    env_file:
+      - ./.envs/.env.test
+    ports:
+      - "${POSTGRES_TEST_PORT}:5432"
