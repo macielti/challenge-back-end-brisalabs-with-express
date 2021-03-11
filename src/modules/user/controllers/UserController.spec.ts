@@ -10,17 +10,21 @@ describe("Users", () => {
   });
 
   it("Should be able to create a new user", async () => {
-    const response = await request(app)
-      .post("/users")
-      .send({ name: "Bruno do Nascimento Maciel", cpf: "06934202198" });
+    const response = await request(app).post("/users").send({
+      name: "Bruno do Nascimento Maciel",
+      cpf: "06934202198",
+      balance: 100,
+    });
     expect(response.status).toBe(201);
     expect(response.body).toHaveProperty("id");
   });
 
   it("Should indicate that user already exists", async () => {
-    const response = await request(app)
-      .post("/users")
-      .send({ name: "Bruno do Nascimento Maciel", cpf: "06934202198" });
+    const response = await request(app).post("/users").send({
+      name: "Bruno do Nascimento Maciel",
+      cpf: "06934202198",
+      balance: 100,
+    });
     expect(response.status).toBe(400);
   });
 });
@@ -41,7 +45,7 @@ describe("Users", () => {
   });
 });
 
-describe("Users - Param Validators on creation of a new one", () => {
+describe("Users - Param Validators on creation of a new one", async () => {
   it("Should not let you create a new user without passing the name param", async () => {
     const response = await request(app)
       .post("/users")

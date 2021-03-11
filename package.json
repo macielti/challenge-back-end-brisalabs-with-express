@@ -10,7 +10,7 @@
     "typeorm": "ts-node-dev node_modules/typeorm/cli.js",
     "test": "NODE_ENV=test jest --detectOpenHandles",
     "lint": "eslint . --ext .ts",
-    "migrate_dev": "NODE_ENV=dev yarn typeorm migration:run"
+    "migrate:dev": "NODE_ENV=dev yarn typeorm migration:run"
   },
   "dependencies": {
     "@types/jest": "^26.0.20",

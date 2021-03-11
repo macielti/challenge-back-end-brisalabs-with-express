@@ -1,16 +1,14 @@
 import { Column, CreateDateColumn, Entity, PrimaryColumn } from "typeorm";
 import { v4 as uuid } from "uuid";
 
-@Entity("users")
-class User {
+@Entity("keys_pix")
+class KeysPIX {
   @PrimaryColumn()
   readonly id: string;
   @Column()
-  name: string;
+  user_id: string;
   @Column()
-  readonly cpf: string;
-  @Column()
-  balance: number;
+  key: string;
   @CreateDateColumn()
   readonly created_at: Date;
 
@@ -21,4 +19,4 @@ class User {
   }
 }
 
-export { User };
+export { KeysPIX };

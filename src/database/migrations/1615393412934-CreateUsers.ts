@@ -8,7 +8,8 @@ export class CreateUsers1615393412934 implements MigrationInterface {
         columns: [
           { name: "id", type: "uuid", isPrimary: true },
           { name: "name", type: "varchar" },
-          { name: "cpf", type: "varchar", isPrimary: true },
+          { name: "cpf", type: "varchar", isUnique: true },
+          { name: "balance", type: "int", unsigned: true },
           {
             name: "created_at",
             type: "timestamp",

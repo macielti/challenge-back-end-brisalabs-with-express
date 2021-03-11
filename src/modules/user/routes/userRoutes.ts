@@ -15,10 +15,13 @@ router.post(
     [Segments.BODY]: JoiExtended.object().keys({
       name: JoiExtended.string().required(),
       cpf: JoiExtended.document().cpf().required(),
+      balance: JoiExtended.number().sign("positive").required(),
     }),
   }),
   userController.create
 );
 router.use(errors());
+
+router.get("/users/:cpf", userController.show);
 
 export default router;
