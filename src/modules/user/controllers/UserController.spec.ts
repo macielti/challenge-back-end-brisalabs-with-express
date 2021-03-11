@@ -45,7 +45,7 @@ describe("Users", () => {
   });
 });
 
-describe("Users - Param Validators on creation of a new one", async () => {
+describe("Users - Param Validators on creation of a new one", () => {
   it("Should not let you create a new user without passing the name param", async () => {
     const response = await request(app)
       .post("/users")

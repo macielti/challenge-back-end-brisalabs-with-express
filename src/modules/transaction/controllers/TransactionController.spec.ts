@@ -43,28 +43,29 @@ describe("PIXKeys", () => {
     expect(responseRegistryNewPIXKey.body).toHaveProperty("id");
   });
 
-  it("Should be able to send money from the first user to de second one", async () => {
-    const responseRegistryNewPIXKey = await request(app)
-      .post("/transaction")
-      .send({
-        pix_key_from: "06934202198",
-        pix_key_to: "82666546039",
-        value: 40,
-      });
-    expect(responseRegistryNewPIXKey.status).toBe(201);
-    expect(responseRegistryNewPIXKey.body).toHaveProperty("id");
+  it("Should be able to send money from the first user to de second one and the money need to be discounted from the sender user account and added to receiver", async () => {
+    const responseTransaction = await request(app).post("/transaction").send({
+      pix_key_from: "06934202198",
+      pix_key_to: "82666546039",
+      value: 40,
+    });
+    expect(responseTransaction.status).toBe(201);
+    expect(responseTransaction.body).toHaveProperty("id");
+
+    let response = await request(app).get("/users/06934202198");
+    expect(response.body.balance).toBe(60);
+    response = await request(app).get("/users/82666546039");
+    expect(response.body.balance).toBe(140);
   });
 
   it("Should not be able to transfer more money that the sender have in balance", async () => {
-    const responseRegistryNewPIXKey = await request(app)
-      .post("/transaction")
-      .send({
-        pix_key_from: "06934202198",
-        pix_key_to: "82666546039",
-        value: 200,
-      });
-    expect(responseRegistryNewPIXKey.status).toBe(400);
-    expect(responseRegistryNewPIXKey.body.error).toBe(
+    const responseTransaction = await request(app).post("/transaction").send({
+      pix_key_from: "06934202198",
+      pix_key_to: "82666546039",
+      value: 200,
+    });
+    expect(responseTransaction.status).toBe(400);
+    expect(responseTransaction.body.error).toBe(
       "The sender user don't have sufficient balance for this transaction!"
     );
   });
