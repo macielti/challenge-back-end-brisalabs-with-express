@@ -58,6 +58,8 @@
 
 ## Original Repo: https://github.com/brisalabs/challenge-back-end
 
+The insomania json file `Insomnia_2021-03-12.json`
+
 ## Common:
 - Set up the .env files according to example files
 
