@@ -14,16 +14,17 @@ const {
   POSTGRES_USER,
   POSTGRES_PASSWORD,
   POSTGRES_DB,
+  DB_HOST,
 } = process.env;
 export default {
   type: "postgres",
-  host: "localhost",
+  host: DB_HOST,
   port: POSTGRES_PORT,
   username: POSTGRES_USER,
   password: POSTGRES_PASSWORD,
   database: POSTGRES_DB,
-  migrations: ["./src/database/migrations/**.ts"],
-  entities: ["./src/models/**.ts"],
+  migrations: ["./src/database/migrations/**.{js,ts}"],
+  entities: ["./src/models/**.{js,ts}"],
   logging: false,
   cli: {
     migrationsDir: "./src/database/migrations",

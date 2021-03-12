@@ -31,4 +31,4 @@ RUN yarn install
 
 COPY --from=build --chown=node:node /home/node/app/build .
 
-CMD [ "yarn", "start"]
+CMD yarn migrate:prod && yarn start

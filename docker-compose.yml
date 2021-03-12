@@ -14,9 +14,13 @@ services:
   
   brisapix_api:
     build: .
-    restart: always
+    restart: always 
+    depends_on: 
+      - db_brisapix_prod
     networks:
       - brisapix
+    env_file:
+      - ./envs/.env.prod
     ports:
       - "${API_PORT}:${API_PORT}"
 
